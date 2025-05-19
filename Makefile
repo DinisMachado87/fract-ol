@@ -6,7 +6,7 @@
 #    By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 19:46:07 by dimachad          #+#    #+#              #
-#    Updated: 2025/05/18 19:46:44 by dimachad         ###   ########.fr        #
+#    Updated: 2025/05/19 20:46:08 by dimachad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LIBFT_DIR = libft/
 MLX_DIR = minilibx-linux/
 LIBFT = -L$(LIBFT_DIR) -lft
 MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-SRC = main.c
+SRC = main.c \
+	  init.c \
+	  events.c
 OBJ = $(SRC:.c=.o)
 DEBUG_OBJ = $(SRC:.c=_debug.o)
 
