@@ -6,13 +6,13 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 20:18:27 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/21 22:01:40 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	scale_pixel(int pixel_coordinate, int axis)
+static double	scale_pixel(int pixel_coordinate, int axis)
 {
 	return (((double)axis / (double)pixel_coordinate) * 4.0 - 2.0);
 }
@@ -40,7 +40,7 @@ So the result is:
 Real part of z²: a² - b²
 Imaginary part of z²: 2ab
 */
-t_c	square_complex(t_c z)
+static t_c	square_complex(t_c z)
 {
 	t_c	result;
 
@@ -49,34 +49,7 @@ t_c	square_complex(t_c z)
 	return (result);
 }
 
-double	mandelbrot_calc(t_c px)
-{
-	t_c	z;
-	int	i;
-	t_c	first_z;
-
-	i = MAX_ITERATIONS;
-	z.r_x = 0.0;
-	z.i_y = 0.0;
-	while (i-- >= 0)
-	{
-		z = square_complex(z);
-		z.r_x = z.r_x + px.r_x;
-		z.i_y = z.i_y + px.i_y;
-		if ((z.r_x * z.r_x + z.i_y * z.i_y) > 4.0)
-			return (color_unbound(px, i));
-		if ((i == 2) || (i == 6) || (i == 12) || (i == 15))
-		{
-			first_z.r_x = z.r_x;
-			first_z.i_y = z.i_y;
-		}
-		if ((z.i_y == first_z.i_y) && (z.r_x == first_z.r_x))
-			return (color_bound(px));
-	}
-	return (color_bound(px));
-}
-
-int	color_calc(int iterations)
+static int	color_calc(int iterations)
 {
 	int	color_offset;
 	int	opacity;
@@ -95,19 +68,63 @@ int	color_calc(int iterations)
 	return ((opacity << 24) | (red << 16) | (green << 8) | blue);
 }
 
+static void	color_pixel(t_c px, t_frctl *fl, int color)
+{
+	int	px_position;
+
+	px_position = (px.i_y * fl->img.line_len) + (px.r_x * (fl->img.bpp / 8));
+	*(unsigned int *)(fl->img.addr + px_position) = color;
+}
+
+static void	mandelbrot_calc(t_c px, t_frctl *fl)
+{
+	t_c	z;
+	int	i;
+	t_c	first_z;
+	t_c	scaled_px;
+
+	i = MAX_ITERATIONS;
+	z.r_x = 0.0;
+	z.i_y = 0.0;
+	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH);
+	scaled_px.i_y = scale_pixel(px.i_y, RES_HIGHT);
+	while (i-- >= 0)
+	{
+		z = square_complex(z);
+		z.r_x = z.r_x + scaled_px.r_x;
+		z.i_y = z.i_y + scaled_px.i_y;
+		if ((z.r_x * z.r_x + z.i_y * z.i_y) > 4.0)
+			return (color_pixel(px, fl, color_calc(i)));
+		if ((i == 2) || (i == 6) || (i == 12) || (i == 15))
+		{
+			first_z.r_x = z.r_x;
+			first_z.i_y = z.i_y;
+		}
+		if ((z.i_y == first_z.i_y) && (z.r_x == first_z.r_x))
+			return (color_pixel(px, fl, color_calc(i)));
+	}
+	return (color_pixel(px, fl, BLACK));
+}
+
 void	render_fractal(t_frctl *fl)
 {
-	int	i_width;
-	int	i_height;
+	t_c		px;
+	double	y;
+	double	x;
 
-	i_width = 0;
-	i_height = 0;
-	while (i_height < RES_HIGHT)
+	y = 0;
+	x = 0;
+	while (y < RES_HIGHT)
 	{
-		while (i_width < RES_WIDTH)
+		x = 0;
+		while (x < RES_WIDTH)
 		{
-			i_width++;
+			px.i_y = y;
+			px.r_x = x;
+			mandelbrot_calc(px, fl);
+			x++;
 		}
-		i_height++;
+		y++;
 	}
+	mlx_put_image_to_window(fl->mlx, fl->mlx_win, fl->img.img, 0, 0);
 }

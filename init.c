@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 14:39:06 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/21 21:02:33 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_all(t_frctl *fl)
 	fl->img.img = mlx_new_image(fl->mlx, RES_WIDTH, RES_HIGHT);
 	if (!fl->img.img)
 		p_err("Err: Failed to create image", fl);
-	fl->img.addr = mlx_get_data_addr(fl->img.img, &fl->img.bits_per_pixel,
-			&fl->img.line_length, &fl->img.endian);
+	fl->img.addr = mlx_get_data_addr(fl->img.img, &fl->img.bpp,
+			&fl->img.line_len, &fl->img.endian);
 	mlx_hook(fl->mlx_win, KeyPress, KeyPressMask, handle_keys, fl);
 	mlx_hook(fl->mlx_win, DestroyNotify, StructureNotifyMask, close_all, fl);
 	return (0);
