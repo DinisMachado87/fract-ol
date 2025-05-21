@@ -6,11 +6,16 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 17:57:54 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:18:27 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double	scale_pixel(int pixel_coordinate, int axis)
+{
+	return (((double)axis / (double)pixel_coordinate) * 4.0 - 2.0);
+}
 
 /*
 Squaring a Complex Number z = a + bi
@@ -35,12 +40,6 @@ So the result is:
 Real part of z²: a² - b²
 Imaginary part of z²: 2ab
 */
-
-double	scale_pixel(int pixel_coordinate, int axis)
-{
-	return (((double)axis / (double)pixel_coordinate) * 4.0 - 2.0);
-}
-
 t_c	square_complex(t_c z)
 {
 	t_c	result;
@@ -56,7 +55,7 @@ double	mandelbrot_calc(t_c px)
 	int	i;
 	t_c	first_z;
 
-	i = N_ITERATIONS;
+	i = MAX_ITERATIONS;
 	z.r_x = 0.0;
 	z.i_y = 0.0;
 	while (i-- >= 0)
@@ -75,6 +74,25 @@ double	mandelbrot_calc(t_c px)
 			return (color_bound(px));
 	}
 	return (color_bound(px));
+}
+
+int	color_calc(int iterations)
+{
+	int	color_offset;
+	int	opacity;
+	int	red;
+	int	green;
+	int	blue;
+
+	iterations = iterations * 510 / MAX_ITERATIONS;
+	if (iterations > 255.0)
+		iterations = 510 - iterations;
+	color_offset = (255 / 3);
+	opacity = 255;
+	red = iterations;
+	green = (iterations + color_offset) % 256;
+	blue = (iterations + color_offset * 2) % 256;
+	return ((opacity << 24) | (red << 16) | (green << 8) | blue);
 }
 
 void	render_fractal(t_frctl *fl)

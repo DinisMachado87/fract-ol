@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/19 21:35:40 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:05:19 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	main(int argc, char **argv)
 	}
 	else
 		p_err("Error: Available fractal at the moment: Mandelbrot\n"
-				"Please call the executable "
-				"followed by your chosen fractal after a space\n",
+				"Please call the exe followed by your chosen fractal after a space\n",
 				&fl);
 	mlx_loop(fl.mlx);
 	return (0);

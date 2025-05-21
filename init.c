@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/19 21:37:39 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:39:06 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_all(t_frctl *fl)
 	fl->mlx_win = mlx_new_window(fl->mlx, 1920, 1080, "Fract_ol");
 	if (!fl->mlx_win)
 		p_err("Err: Failed to create window", fl);
-	fl->img.img = mlx_new_image(fl->mlx, 1920, 1080);
+	fl->img.img = mlx_new_image(fl->mlx, RES_WIDTH, RES_HIGHT);
 	if (!fl->img.img)
 		p_err("Err: Failed to create image", fl);
 	fl->img.addr = mlx_get_data_addr(fl->img.img, &fl->img.bits_per_pixel,
