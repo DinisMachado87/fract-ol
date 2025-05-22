@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 14:55:47 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:39:33 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int	main(int argc, char **argv)
 	if ((argc == 2) && (ft_strncmp(argv[1], "Mandelbrot", 10) == 0))
 	{
 		fl.zoom = 1.0;
+		fl.x_offset = 0.0;
+		fl.x_offset = 0.0;
+		fl.zoom_to_update = 0;
 		init_mlx_structure(&fl);
 		init_scale_image(&fl);
 		init_events(&fl);

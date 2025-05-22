@@ -6,14 +6,13 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 13:26:01 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:01:24 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static double	scale_pixel(int pixel_coordinate, int axis, double range,
-		double min)
+double	scale_pixel(int pixel_coordinate, int axis, double range, double min)
 {
 	return (((double)pixel_coordinate / (double)(axis - 1)) * range + min);
 }

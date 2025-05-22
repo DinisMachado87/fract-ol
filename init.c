@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 15:46:44 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:05:25 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	init_mlx_structure(t_frctl *fl)
 int	init_scale_image(t_frctl *fl)
 {
 	fl->x_width = 5.0 * fl->zoom;
-	fl->x_min = fl->x_width / 2 * -1;
+	fl->x_min = (fl->x_width / 2 * -1) + fl->x_offset;
 	fl->y_width = scale_y_px_to_math(fl);
-	fl->y_min = fl->y_width / 2 * -1;
+	fl->y_min = (fl->y_width / 2 * -1) + fl->y_offset;
 	return (0);
 }
 
@@ -47,5 +47,6 @@ int	init_events(t_frctl *fl)
 	mlx_mouse_hook(fl->mlx_win, handle_mouse, fl);
 	mlx_hook(fl->mlx_win, KeyPress, KeyPressMask, handle_keys, fl);
 	mlx_hook(fl->mlx_win, DestroyNotify, StructureNotifyMask, close_all, fl);
+	mlx_loop_hook(fl->mlx, render_zoom, fl);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 15:41:04 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:06:06 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdio.h>
 
 //# define RES_WIDTH 1920
-# define RES_WIDTH 600
+# define RES_WIDTH 900
 //# define RES_HIGHT 1080
-# define RES_HIGHT 300
+# define RES_HIGHT 600
 # define MAX_ITERATIONS 200
 # define BLACK 0xFF000000
 
@@ -48,17 +48,23 @@ typedef struct s_fractal
 	t_img	img;
 	double	x_min;
 	double	x_width;
+	double	x_offset;
 	double	y_min;
 	double	y_width;
+	double	y_offset;
 	double	zoom;
+	int		zoom_to_update;
 
 }			t_frctl;
 
+double		scale_pixel(int pixel_coordinate, int axis, double range,
+				double min);
 int			init_mlx_structure(t_frctl *fl);
 int			init_scale_image(t_frctl *fl);
 int			init_events(t_frctl *fl);
 int			handle_mouse(int mouse_move, int x, int y, t_frctl *fl);
 int			handle_keys(int keycode, t_frctl *fl);
+int			render_zoom(t_frctl *fl);
 int			close_window(int keycode, t_frctl *fl);
 int			close_all(t_frctl *fl);
 void		p_err(char *err, t_frctl *fl);
