@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 12:53:25 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:26:01 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	color_pixel(t_c px, t_frctl *fl, int color)
 {
 	int	px_position;
 
-	px_position = (px.i_y * fl->img.line_len) + (px.r_x * (fl->img.bpp / 8));
+	px_position = (px.i_y * fl->img.line_len) + (px.r_x * (fl->img.bpp / 8.0));
 	*(unsigned int *)(fl->img.addr + px_position) = color;
 }
 

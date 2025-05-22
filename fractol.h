@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 12:20:05 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:41:04 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 
-# define RES_WIDTH 1920
-# define RES_HIGHT 1080
+//# define RES_WIDTH 1920
+# define RES_WIDTH 600
+//# define RES_HIGHT 1080
+# define RES_HIGHT 300
 # define MAX_ITERATIONS 200
 # define BLACK 0xFF000000
 
@@ -52,7 +54,10 @@ typedef struct s_fractal
 
 }			t_frctl;
 
-int			init_all(t_frctl *fl);
+int			init_mlx_structure(t_frctl *fl);
+int			init_scale_image(t_frctl *fl);
+int			init_events(t_frctl *fl);
+int			handle_mouse(int mouse_move, int x, int y, t_frctl *fl);
 int			handle_keys(int keycode, t_frctl *fl);
 int			close_window(int keycode, t_frctl *fl);
 int			close_all(t_frctl *fl);
