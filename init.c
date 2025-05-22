@@ -6,11 +6,16 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 21:02:33 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:25:46 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+double	scale_y_px_to_math(t_frctl *fl)
+{
+	return (fl->x_width * RES_HIGHT / RES_WIDTH);
+}
 
 int	init_all(t_frctl *fl)
 {
@@ -25,6 +30,11 @@ int	init_all(t_frctl *fl)
 		p_err("Err: Failed to create image", fl);
 	fl->img.addr = mlx_get_data_addr(fl->img.img, &fl->img.bpp,
 			&fl->img.line_len, &fl->img.endian);
+	fl->x_min = -2.5;
+	fl->x_width = 4.0;
+	fl->y_min = -2.0;
+	fl->y_width = scale_y_px_to_math(fl);
+	fl->zoom = 1.0;
 	mlx_hook(fl->mlx_win, KeyPress, KeyPressMask, handle_keys, fl);
 	mlx_hook(fl->mlx_win, DestroyNotify, StructureNotifyMask, close_all, fl);
 	return (0);

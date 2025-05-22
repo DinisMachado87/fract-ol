@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 22:01:40 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:25:35 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static double	scale_pixel(int pixel_coordinate, int axis)
 {
-	return (((double)axis / (double)pixel_coordinate) * 4.0 - 2.0);
+	return (((double)pixel_coordinate / (double)(axis - 1)) * 4.0 - 2.0);
 }
 
 /*
@@ -101,16 +101,16 @@ static void	mandelbrot_calc(t_c px, t_frctl *fl)
 			first_z.i_y = z.i_y;
 		}
 		if ((z.i_y == first_z.i_y) && (z.r_x == first_z.r_x))
-			return (color_pixel(px, fl, color_calc(i)));
+			return (color_pixel(px, fl, BLACK));
 	}
 	return (color_pixel(px, fl, BLACK));
 }
 
 void	render_fractal(t_frctl *fl)
 {
-	t_c		px;
-	double	y;
-	double	x;
+	t_c	px;
+	int	y;
+	int	x;
 
 	y = 0;
 	x = 0;
@@ -119,8 +119,8 @@ void	render_fractal(t_frctl *fl)
 		x = 0;
 		while (x < RES_WIDTH)
 		{
-			px.i_y = y;
-			px.r_x = x;
+			px.i_y = (double)y;
+			px.r_x = (double)x;
 			mandelbrot_calc(px, fl);
 			x++;
 		}

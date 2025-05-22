@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/21 21:06:00 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:20:05 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define RES_WIDTH 1920
 # define RES_HIGHT 1080
-# define MAX_ITERATIONS 50
+# define MAX_ITERATIONS 200
 # define BLACK 0xFF000000
 
 typedef struct s_img
@@ -44,6 +44,12 @@ typedef struct s_fractal
 	void	*mlx;
 	void	*mlx_win;
 	t_img	img;
+	double	x_min;
+	double	x_width;
+	double	y_min;
+	double	y_width;
+	double	zoom;
+
 }			t_frctl;
 
 int			init_all(t_frctl *fl);
