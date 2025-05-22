@@ -6,15 +6,16 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 12:25:35 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:53:25 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static double	scale_pixel(int pixel_coordinate, int axis)
+static double	scale_pixel(int pixel_coordinate, int axis, double range,
+		double min)
 {
-	return (((double)pixel_coordinate / (double)(axis - 1)) * 4.0 - 2.0);
+	return (((double)pixel_coordinate / (double)(axis - 1)) * range + min);
 }
 
 /*
@@ -86,8 +87,8 @@ static void	mandelbrot_calc(t_c px, t_frctl *fl)
 	i = MAX_ITERATIONS;
 	z.r_x = 0.0;
 	z.i_y = 0.0;
-	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH);
-	scaled_px.i_y = scale_pixel(px.i_y, RES_HIGHT);
+	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
+	scaled_px.i_y = scale_pixel(px.i_y, RES_HIGHT, fl->y_width, fl->y_min);
 	while (i-- >= 0)
 	{
 		z = square_complex(z);
