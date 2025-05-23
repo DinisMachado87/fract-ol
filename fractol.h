@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 19:06:06 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:57:39 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define RES_WIDTH 900
 //# define RES_HIGHT 1080
 # define RES_HIGHT 600
-# define MAX_ITERATIONS 200
+# define MAX_ITERATIONS 500
 # define BLACK 0xFF000000
 
 typedef struct s_img
@@ -54,7 +54,6 @@ typedef struct s_fractal
 	double	y_offset;
 	double	zoom;
 	int		zoom_to_update;
-
 }			t_frctl;
 
 double		scale_pixel(int pixel_coordinate, int axis, double range,
@@ -64,10 +63,10 @@ int			init_scale_image(t_frctl *fl);
 int			init_events(t_frctl *fl);
 int			handle_mouse(int mouse_move, int x, int y, t_frctl *fl);
 int			handle_keys(int keycode, t_frctl *fl);
-int			render_zoom(t_frctl *fl);
+int			render_zoom(t_frctl *fl, int quadratic);
 int			close_window(int keycode, t_frctl *fl);
 int			close_all(t_frctl *fl);
 void		p_err(char *err, t_frctl *fl);
-void		render_fractal(t_frctl *fl);
+void		render_fractal(t_frctl *fl, int quadratic);
 
 #endif

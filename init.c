@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/22 19:05:25 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:15:53 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ int	init_scale_image(t_frctl *fl)
 	return (0);
 }
 
+static int	render_zoom_full(t_frctl *fl)
+{
+	render_zoom(fl, 0);
+	return (0);
+}
+
 int	init_events(t_frctl *fl)
 {
 	mlx_mouse_hook(fl->mlx_win, handle_mouse, fl);
 	mlx_hook(fl->mlx_win, KeyPress, KeyPressMask, handle_keys, fl);
 	mlx_hook(fl->mlx_win, DestroyNotify, StructureNotifyMask, close_all, fl);
-	mlx_loop_hook(fl->mlx, render_zoom, fl);
+	mlx_loop_hook(fl->mlx, render_zoom_full, fl);
 	return (0);
 }

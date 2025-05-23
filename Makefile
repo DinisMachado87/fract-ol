@@ -6,7 +6,7 @@
 #    By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/18 19:46:07 by dimachad          #+#    #+#              #
-#    Updated: 2025/05/21 21:02:56 by dimachad         ###   ########.fr        #
+#    Updated: 2025/05/23 14:52:03 by dimachad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fractol
 DEBUG_NAME = fractol_debug
 CC = cc
 RM = rm -f
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -O2
 DEBUG_FLAGS = -Wall -Werror -Wextra -g -O0
 LIBFT_DIR = libft/
 MLX_DIR = minilibx-linux/
