@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/23 14:57:39 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:57:22 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define RES_WIDTH 900
 //# define RES_HIGHT 1080
 # define RES_HIGHT 600
-# define MAX_ITERATIONS 500
+# define MAX_ITERATIONS 600
 # define BLACK 0xFF000000
 
 typedef struct s_img

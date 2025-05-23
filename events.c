@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/23 14:54:22 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:11:55 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,14 @@ int	render_zoom(t_frctl *fl, int quadratic)
 
 int	handle_mouse(int mouse_move, int x, int y, t_frctl *fl)
 {
-	// printf("%d | ", mouse_move);
 	recenter_img(x, y, fl);
-	if (mouse_move == 4)
+	if (mouse_move == 5)
 		fl->zoom *= 1.05;
-	else if (mouse_move == 5)
+	else if (mouse_move == 4)
 		fl->zoom *= 0.95;
 	else
 		return (-1);
-	if (fl->zoom_to_update == 12)
+	if (fl->zoom_to_update == 10)
 		return (render_zoom(fl, 1));
 	else
 		fl->zoom_to_update++;
@@ -47,7 +46,6 @@ int	handle_mouse(int mouse_move, int x, int y, t_frctl *fl)
 
 int	handle_keys(int keycode, t_frctl *fl)
 {
-	// printf("%d | ", keycode);
 	if (keycode == 65307)
 		return (close_all(fl));
 	else if (keycode == 65361)
