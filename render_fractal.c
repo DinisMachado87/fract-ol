@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/23 18:14:50 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:03:01 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,24 @@ static int	color_calc(int iterations, t_frctl *fl)
 	iterations = iterations * 255 / (MAX_ITERATIONS * (fl->zoom + 1));
 	color_offset = (255 / 3);
 	opacity = 255;
-	red = iterations;
-	green = 0;
-	blue = -iterations;
+	if (iterations < color_offset)
+	{
+		red = 0;
+		green = 0;
+		blue = iterations;
+	}
+	else if (iterations < (color_offset * 2))
+	{
+		red = iterations - color_offset;
+		green = 0;
+		blue = iterations;
+	}
+	else
+	{
+		red = iterations - color_offset;
+		green = iterations - (color_offset * 2);
+		blue = iterations;
+	}
 	return ((opacity << 24) | (blue << 16) | (green << 8) | red);
 }
 
