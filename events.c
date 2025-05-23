@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/23 18:11:55 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:46:36 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	recenter_img(int x, int y, t_frctl *fl)
 {
-	x = x - (RES_WIDTH / 2);
-	y = y - (RES_HIGHT / 2);
+	x = (x - (RES_WIDTH / 2));
+	y = (y - (RES_HIGHT / 2));
 	fl->x_min = scale_pixel(x, RES_WIDTH, fl->x_width, fl->x_min);
-	fl->y_min = scale_pixel(y, RES_HIGHT, fl->y_width, fl->x_min);
+	fl->y_min = scale_pixel(y, RES_HIGHT, fl->y_width, fl->y_min);
 }
 
 int	render_zoom(t_frctl *fl, int quadratic)
