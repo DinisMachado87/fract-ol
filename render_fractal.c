@@ -94,7 +94,7 @@ static int	color_calc(int iterations, t_frctl *fl)
 	opacity = 255;
 	red = iterations;
 	green = 0;
-	blue = -iterations;
+	blue = 255 - iterations;
 	return ((opacity << 24) | (blue << 16) | (green << 8) | red);
 }
 

@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	{
 		fl.zoom = 1.0;
 		fl.x_offset = 0.0;
-		fl.x_offset = 0.0;
+		fl.y_offset = 0.0;
 		fl.zoom_to_update = 0;
 		init_mlx_structure(&fl);
 		init_scale_image(&fl);

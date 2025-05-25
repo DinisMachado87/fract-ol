@@ -16,8 +16,11 @@ static void	recenter_img(int x, int y, t_frctl *fl)
 {
 	x = (x - (RES_WIDTH / 2));
 	y = (y - (RES_HIGHT / 2));
-	fl->x_min = scale_pixel(x, RES_WIDTH, fl->x_width, fl->x_min);
-	fl->y_min = scale_pixel(y, RES_HIGHT, fl->y_width, fl->y_min);
+	printf("x = %d || y = %d\n", x, y);
+	printf("x_off = %f || y_off = %f\n", fl->x_offset, fl->y_offset);
+	fl->x_offset = scale_pixel(x, RES_WIDTH, fl->x_width, fl->x_min);
+	fl->y_offset = scale_pixel(y, RES_HIGHT, fl->y_width, fl->y_min);
+	printf("x_off = %f || y_off = %f\n", fl->x_offset, fl->y_offset);
 }
 
 int	render_zoom(t_frctl *fl, int quadratic)
