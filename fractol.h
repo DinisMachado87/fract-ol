@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 12:56:05 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:09:06 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef struct s_fractal
 	double	y_width;
 	double	y_offset;
 	double	zoom;
-	double	iterations_ratio;
+	double	iter_ratio;
 	int		zoom_to_update;
 }			t_frctl;
 
+// static float	str_to_decimals(char *str);
 double		scale_y_px_to_math(t_frctl *fl);
 double		scale_pixel(int pixel_coordinate, int axis, double range,
 				double min);

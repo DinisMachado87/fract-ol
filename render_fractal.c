@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_fractal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: dimachad <dimachad@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 12:04:32 by dimachad         ###   ########.fr       */
+/*   Created: 2025/05/27 17:08:51 by dimachad          #+#    #+#             */
+/*   Updated: 2025/05/27 17:19:25 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,18 @@ static t_c	square_complex(t_c z)
 
 static int	color_calc(int iterations, t_frctl *fl)
 {
-	int	color_offset;
-	int	opacity;
 	int	red;
 	int	green;
 	int	blue;
 
-	iterations = iterations * 255 / (MAX_ITERATIONS * (fl->iterations_ratio
-				+ 1));
-	color_offset = (255 / 3);
-	opacity = 255;
-	if (iterations < color_offset)
+	iterations = iterations * 255 / (MAX_ITERATIONS * (fl->iter_ratio + 1));
+	if (iterations < (255 / 3))
 	{
 		red = 255 - iterations;
 		green = iterations;
 		blue = 0;
 	}
-	else if (iterations < (color_offset * 2))
+	else if (iterations < ((255 / 3) * 2))
 	{
 		red = 0;
 		green = 255 - iterations;
@@ -73,7 +68,7 @@ static int	color_calc(int iterations, t_frctl *fl)
 		green = 0;
 		blue = 255 - iterations;
 	}
-	return ((opacity << 24) | (blue << 16) | (green << 8) | red);
+	return ((255 << 24) | (blue << 16) | (green << 8) | red);
 }
 
 static void	color_pixel(t_c px, t_frctl *fl, int color, int quadratic)
@@ -114,7 +109,7 @@ static void	mandelbrot_calc(t_c px, t_frctl *fl, int quadratic)
 	t_c	first_z;
 	t_c	scaled_px;
 
-	i = (MAX_ITERATIONS * (fl->iterations_ratio + 1));
+	i = (MAX_ITERATIONS * (fl->iter_ratio + 1));
 	z.r_x = 0.0;
 	z.i_y = 0.0;
 	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
