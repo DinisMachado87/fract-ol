@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 11:54:25 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:44:32 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	zoom_and_recenter(int x, int y, t_frctl *fl, char zoom)
 	else
 	{
 		fl->zoom *= 1.05;
-		fl->iterations_ratio -= 0.05;
+		fl->iterations_ratio -= 0.04;
+		if (fl->iterations_ratio < 0.0)
+			fl->iterations_ratio += 0.00;
 	}
-	fl->x_width = 5.0 * fl->zoom;
+	fl->x_width = 4.0 * fl->zoom;
 	fl->y_width = scale_y_px_to_math(fl);
 	fl->x_min = fl->x_offset - ((double)x / RES_WIDTH) * fl->x_width;
 	fl->y_min = fl->y_offset - ((double)y / RES_HIGHT) * fl->y_width;
-	printf("zoom :%f", fl->zoom);
-	printf(" || iterations ration :%f\n", fl->iterations_ratio);
 }
 
 int	render_zoom(t_frctl *fl, int quadratic)
@@ -49,9 +49,10 @@ int	handle_mouse(int mouse_move, int x, int y, t_frctl *fl)
 		zoom_and_recenter(x, y, fl, '-');
 	else
 		return (-1);
-	//	if (fl->zoom_to_update == 10)
-	//		return (render_zoom(fl, 1));
-	fl->zoom_to_update++;
+	if (fl->zoom_to_update == 10)
+		render_zoom(fl, 1);
+	else
+		fl->zoom_to_update++;
 	return (0);
 }
 

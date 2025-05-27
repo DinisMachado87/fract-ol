@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 11:48:23 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:38:42 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	init_mlx_structure(t_frctl *fl)
 
 int	init_scale_image(t_frctl *fl)
 {
-	fl->x_width = 5.0 * fl->zoom;
-	fl->x_min = (fl->x_width / 2 * -1);
+	fl->x_width = 4.0 * fl->zoom;
+	fl->x_min = (fl->x_width / 3 * -2);
 	fl->y_width = scale_y_px_to_math(fl);
-	fl->y_min = (fl->y_width / 2 * -1);
+	fl->y_min = (fl->y_width / 3 * -1.5);
 	return (0);
 }
 

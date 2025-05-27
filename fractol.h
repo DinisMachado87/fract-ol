@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 11:42:36 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:56:05 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 
-// # define RES_WIDTH 1920
-# define RES_WIDTH 900
-// # define RES_HIGHT 1080
-# define RES_HIGHT 600
+# define RES_WIDTH 1300
+# define RES_HIGHT 800
 # define MAX_ITERATIONS 50
 # define BLACK 0xFF000000
 
