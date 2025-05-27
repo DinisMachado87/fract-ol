@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 08:52:49 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:48:23 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ int	init_scale_image(t_frctl *fl)
 	fl->x_min = (fl->x_width / 2 * -1);
 	fl->y_width = scale_y_px_to_math(fl);
 	fl->y_min = (fl->y_width / 2 * -1);
-	// printf("x_min %f, y_min %f || ", fl->x_min, fl->y_min);
-	// printf("x_off %f, y_off %f || ", fl->x_offset, fl->y_offset);
-	// printf("zoom %f\n", fl->zoom);
 	return (0);
 }
 

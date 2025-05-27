@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 11:19:18 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:54:25 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	zoom_and_recenter(int x, int y, t_frctl *fl, char zoom)
 	if (zoom == '+')
 	{
 		fl->zoom *= 0.95;
-		fl->iterations_ratio += 0.5;
+		fl->iterations_ratio += 0.05;
 	}
 	else
 	{
 		fl->zoom *= 1.05;
-		fl->iterations_ratio -= 0.5;
+		fl->iterations_ratio -= 0.05;
 	}
 	fl->x_width = 5.0 * fl->zoom;
 	fl->y_width = scale_y_px_to_math(fl);

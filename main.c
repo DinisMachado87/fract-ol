@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 08:39:06 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:50:13 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv)
 		fl.x_offset = 0.0;
 		fl.y_offset = 0.0;
 		fl.zoom_to_update = 0;
+		fl.iterations_ratio = 1;
 		init_mlx_structure(&fl);
 		init_scale_image(&fl);
 		init_events(&fl);

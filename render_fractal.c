@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:30:41 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 11:17:18 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:50:26 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static void	mandelbrot_calc(t_c px, t_frctl *fl, int quadratic)
 	t_c	first_z;
 	t_c	scaled_px;
 
-	i = (MAX_ITERATIONS * (fl->zoom + 1));
+	i = (MAX_ITERATIONS * (fl->iterations_ratio + 1));
 	z.r_x = 0.0;
 	z.i_y = 0.0;
 	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
