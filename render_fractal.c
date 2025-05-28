@@ -6,16 +6,11 @@
 /*   By: dimachad <dimachad@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:08:51 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/27 17:19:25 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/28 23:10:13 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-double	scale_pixel(int pixel_coordinate, int axis, double range, double min)
-{
-	return (((double)pixel_coordinate / (double)(axis - 1)) * range + min);
-}
 
 /*
 Squaring a Complex Number z = a + bi
@@ -34,13 +29,19 @@ parts. = (a² - b²) + (2ab)i So the result is:
 Real part of z²: a² - b²
 Imaginary part of z²: 2ab
 */
-static t_c	square_complex(t_c z)
+
+static inline t_c	square_complex(t_c z)
 {
 	t_c	result;
 
 	result.r_x = z.r_x * z.r_x - z.i_y * z.i_y;
 	result.i_y = 2.0 * z.r_x * z.i_y;
 	return (result);
+}
+
+double	scale_pixel(int pixel_coordinate, int axis, double range, double min)
+{
+	return (((double)pixel_coordinate / (double)(axis - 1)) * range + min);
 }
 
 static int	color_calc(int iterations, t_frctl *fl)
@@ -102,26 +103,39 @@ static void	color_pixel(t_c px, t_frctl *fl, int color, int quadratic)
 	}
 }
 
-static void	mandelbrot_calc(t_c px, t_frctl *fl, int quadratic)
+inline static void	fractal_assignement(t_c px, t_c *c, t_c *z, t_frctl *fl)
+{
+	if (fl->fractal == MANDELBROT)
+	{
+		c->r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
+		c->i_y = scale_pixel(px.i_y, RES_HIGHT, fl->y_width, fl->y_min);
+		*z = fl->c;
+	}
+	else if (fl->fractal == JULIA)
+	{
+		z->r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
+		z->i_y = scale_pixel(px.i_y, RES_HIGHT, fl->y_width, fl->y_min);
+		*c = fl->c;
+	}
+}
+
+static void	fractal_calc(t_c px, t_frctl *fl, int quadratic)
 {
 	t_c	z;
+	t_c	c;
 	int	i;
 	t_c	first_z;
-	t_c	scaled_px;
 
 	i = (MAX_ITERATIONS * (fl->iter_ratio + 1));
-	z.r_x = 0.0;
-	z.i_y = 0.0;
-	scaled_px.r_x = scale_pixel(px.r_x, RES_WIDTH, fl->x_width, fl->x_min);
-	scaled_px.i_y = scale_pixel(px.i_y, RES_HIGHT, fl->y_width, fl->y_min);
+	fractal_assignement(px, &c, &z, fl);
 	while (i-- >= 0)
 	{
 		z = square_complex(z);
-		z.r_x = z.r_x + scaled_px.r_x;
-		z.i_y = z.i_y + scaled_px.i_y;
+		z.r_x = z.r_x + c.r_x;
+		z.i_y = z.i_y + c.i_y;
 		if ((z.r_x * z.r_x + z.i_y * z.i_y) > 4.0)
 			return (color_pixel(px, fl, color_calc(i, fl), quadratic));
-		if ((i == 10) || (i == 50))
+		if ((i == 7) || (i == 20))
 		{
 			first_z.r_x = z.r_x;
 			first_z.i_y = z.i_y;
@@ -147,7 +161,7 @@ void	render_fractal(t_frctl *fl, int quadratic)
 		{
 			px.i_y = (double)y;
 			px.r_x = (double)x;
-			mandelbrot_calc(px, fl, quadratic);
+			fractal_calc(px, fl, quadratic);
 			x += (1 + quadratic);
 		}
 		y += (1 + quadratic);

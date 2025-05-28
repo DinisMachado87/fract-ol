@@ -23,6 +23,7 @@ MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 SRC = main.c \
 	  init.c \
 	  render_fractal.c \
+	  str_to_float.c \
 	  events.c
 OBJ = $(SRC:.c=.o)
 DEBUG_OBJ = $(SRC:.c=_debug.o)
