@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:08:51 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/28 23:10:13 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/28 23:50:36 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,21 @@ double	scale_pixel(int pixel_coordinate, int axis, double range, double min)
 
 static int	color_calc(int iterations, t_frctl *fl)
 {
-	int	red;
-	int	green;
-	int	blue;
+	int	rgb_a;
+	int	rgb_b;
+	int	rgb_c;
 
-	iterations = iterations * 255 / (MAX_ITERATIONS * (fl->iter_ratio + 1));
+	iterations = iterations * 255 / (MAX_ITERATIONS * fl->fractal
+			* (fl->iter_ratio + 1));
+	rgb_a = 255 - iterations;
+	rgb_b = iterations;
+	rgb_c = 0;
 	if (iterations < (255 / 3))
-	{
-		red = 255 - iterations;
-		green = iterations;
-		blue = 0;
-	}
+		return ((255 << 24) | (rgb_c << 16) | (rgb_b << 8) | rgb_a);
 	else if (iterations < ((255 / 3) * 2))
-	{
-		red = 0;
-		green = 255 - iterations;
-		blue = iterations;
-	}
+		return ((255 << 24) | (rgb_b << 16) | (rgb_a << 8) | rgb_c);
 	else
-	{
-		red = iterations;
-		green = 0;
-		blue = 255 - iterations;
-	}
-	return ((255 << 24) | (blue << 16) | (green << 8) | red);
+		return ((255 << 24) | (rgb_a << 16) | (rgb_c << 8) | rgb_b);
 }
 
 static void	color_pixel(t_c px, t_frctl *fl, int color, int quadratic)
@@ -126,7 +117,7 @@ static void	fractal_calc(t_c px, t_frctl *fl, int quadratic)
 	int	i;
 	t_c	first_z;
 
-	i = (MAX_ITERATIONS * (fl->iter_ratio + 1));
+	i = (MAX_ITERATIONS * fl->fractal * (fl->iter_ratio + 1));
 	fractal_assignement(px, &c, &z, fl);
 	while (i-- >= 0)
 	{

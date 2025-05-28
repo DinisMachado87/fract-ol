@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/28 23:12:37 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/28 23:51:26 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 # include <stdio.h>
 
 # define MANDELBROT 1
-# define JULIA 2
+# define JULIA 8
+# define PLAYFULL 1
 # define RES_WIDTH 1300
 # define RES_HIGHT 800
-# define MAX_ITERATIONS 700
+# define MAX_ITERATIONS 30
 # define BLACK 0xFF000000
 
 typedef struct s_img
@@ -57,6 +58,7 @@ typedef struct s_fractal
 	double	iter_ratio;
 	int		zoom_to_update;
 	int		fractal;
+	int		color;
 	t_c		c;
 }			t_frctl;
 
