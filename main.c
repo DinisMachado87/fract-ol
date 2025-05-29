@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/28 23:44:38 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:53:27 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,17 @@ void	is_julia_or_mandel(int argc, char **argv, t_frctl *fl)
 		fl->fractal = MANDELBROT;
 		fl->c.r_x = 0.0;
 		fl->c.i_y = 0.0;
+		fl->mouse_coordinates = 0;
 	}
 	else if (!ft_strncmp(argv[1], "Julia", 5))
 	{
 		if (argc == 4 && str_to_float(argv[2]) != 0
 			&& str_to_float(argv[3]) != 0)
 		{
+			fl->fractal = JULIA;
 			fl->c.r_x = str_to_float(argv[2]);
 			fl->c.i_y = str_to_float(argv[3]);
-			fl->fractal = JULIA;
+			fl->mouse_coordinates = 1;
 		}
 		else
 			exit(p_err("Err: Julia set takes two decilmal arguments\n", fl));
@@ -84,7 +86,7 @@ int	main(int argc, char **argv)
 		fl.zoom = 1.0;
 		fl.zoom_to_update = 0;
 		fl.iter_ratio = 1;
-		fl.color = PLAYFULL;
+		fl.color = BLUE;
 		init_mlx_structure(&fl);
 		init_scale_image(&fl);
 		init_events(&fl);

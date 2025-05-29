@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:08:51 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/28 23:50:36 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/29 21:55:37 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,22 @@ static int	color_calc(int iterations, t_frctl *fl)
 	int	rgb_b;
 	int	rgb_c;
 
-	iterations = iterations * 255 / (MAX_ITERATIONS * fl->fractal
-			* (fl->iter_ratio + 1));
+	iterations = iterations * 255 / (MAX_ITERATIONS * (fl->iter_ratio + 1));
 	rgb_a = 255 - iterations;
 	rgb_b = iterations;
 	rgb_c = 0;
-	if (iterations < (255 / 3))
+	if (fl->color == 1)
+	{
+		if (iterations < (255 / 3))
+			return ((255 << 24) | (rgb_c << 16) | (rgb_b << 8) | rgb_a);
+		else if (iterations < ((255 / 3) * 2))
+			return ((255 << 24) | (rgb_b << 16) | (rgb_a << 8) | rgb_c);
+		else
+			return ((255 << 24) | (rgb_a << 16) | (rgb_c << 8) | rgb_b);
+	}
+	if (fl->color == 2)
 		return ((255 << 24) | (rgb_c << 16) | (rgb_b << 8) | rgb_a);
-	else if (iterations < ((255 / 3) * 2))
+	if (fl->color == 3)
 		return ((255 << 24) | (rgb_b << 16) | (rgb_a << 8) | rgb_c);
 	else
 		return ((255 << 24) | (rgb_a << 16) | (rgb_c << 8) | rgb_b);
@@ -117,7 +125,7 @@ static void	fractal_calc(t_c px, t_frctl *fl, int quadratic)
 	int	i;
 	t_c	first_z;
 
-	i = (MAX_ITERATIONS * fl->fractal * (fl->iter_ratio + 1));
+	i = (MAX_ITERATIONS * (fl->iter_ratio + 1));
 	fractal_assignement(px, &c, &z, fl);
 	while (i-- >= 0)
 	{
@@ -158,4 +166,22 @@ void	render_fractal(t_frctl *fl, int quadratic)
 		y += (1 + quadratic);
 	}
 	mlx_put_image_to_window(fl->mlx, fl->mlx_win, fl->img.img, 0, 0);
+	if (fl->fractal == MANDELBROT)
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 20, 0x78AB46, M_TITLE);
+	else
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 20, 0x78AB46, J_TITLE);
+	if (fl->color == BLUE)
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 40, 0x78AB46, BLUE_STR);
+	else if (fl->color == GREEN)
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 40, 0x78AB46, GREEN_STR);
+	else if (fl->color == RED)
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 40, 0x78AB46, RED_STR);
+	else
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 40, 0x78AB46, TRIPPY_STR);
+	if (fl->mouse_coordinates)
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 60, 0x78AB46, ON_FIRE);
+	else
+		mlx_string_put(fl->mlx, fl->mlx_win, 20, 60, 0x78AB46, OFF_FIRE);
+	mlx_string_put(fl->mlx, fl->mlx_win, 20, 80, 0x78AB46, ARROWS);
+	mlx_string_put(fl->mlx, fl->mlx_win, 20, 100, 0x78AB46, WHEEL);
 }
