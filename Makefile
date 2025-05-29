@@ -40,6 +40,10 @@ $(LIBFT_DIR)/libft.a:
 	make -C $(LIBFT_DIR)
 
 $(MLX_DIR)/libmlx.a:
+	@if [ ! -d $(MLX_DIR) ]; then \
+		echo "Cloning minilibx..."; \
+		git clone https://github.com/42paris/minilibx-linux.git $(MLX_DIR); \
+	fi
 	cd $(MLX_DIR) && ./configure
 	make -C $(MLX_DIR)
 
