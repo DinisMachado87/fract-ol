@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:10:12 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:42:31 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	handle_mouse_motion(int x, int y, t_frctl *fl)
 
 int	handle_keys(int keycode, t_frctl *fl)
 {
-	if (keycode == 65307)
+	if (keycode == ESC_KE)
 		return (close_all(fl));
 	else if (keycode == F_KE && fl->mouse_coordinates)
 		fl->mouse_coordinates = 0;
@@ -89,13 +89,13 @@ int	handle_keys(int keycode, t_frctl *fl)
 			fl->color = 0;
 		fl->color += 1;
 	}
-	else if (keycode == 65361)
+	else if (keycode == A_LEFT)
 		fl->x_min -= fl->x_width / 5;
-	else if (keycode == 65363)
+	else if (keycode == A_RIGHT)
 		fl->x_min += fl->x_width / 5;
-	else if (keycode == 65362)
+	else if (keycode == A_UP)
 		fl->y_min -= fl->y_width / 5;
-	else if (keycode == 65364)
+	else if (keycode == A_DOWN)
 		fl->y_min += fl->y_width / 5;
 	render_fractal(fl, 0);
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/30 18:10:14 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 21:42:40 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@
 # define MAX_ITERATIONS 30
 # define BLACK 0xFF000000
 # define THRESHOLD 0.02
+# define ESC_KE 65307
 # define F_KE 102
 # define C_KE 99
+# define A_LEFT 65361
+# define A_RIGHT 65363 
+# define A_UP 65362
+# define A_DOWN 65364 
 # define M_TITLE "Fract-ol     MANDELBROT"
 # define J_TITLE "Fract-ol     JULIA SET"
 # define BLUE_STR "[C]olor      BLUE"
