@@ -6,53 +6,28 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/29 16:53:27 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:25:22 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	close_all(t_frctl *fl)
+static void	init_values(t_frctl *fl, float c_r_x, float c_i_y, int coordinates)
 {
-	if (fl->img.img)
-	{
-		mlx_destroy_image(fl->mlx, fl->img.img);
-		fl->img.img = NULL;
-	}
-	if (fl->mlx_win)
-	{
-		mlx_destroy_window(fl->mlx, fl->mlx_win);
-		fl->mlx_win = NULL;
-	}
-	if (fl->mlx)
-	{
-		mlx_destroy_display(fl->mlx);
-		free(fl->mlx);
-		fl->mlx = NULL;
-	}
-	exit(0);
-}
-
-int	p_err(char *err, t_frctl *fl)
-{
-	while (*err)
-		write(2, err++, 1);
-	write(2, "\n", 1);
-	close_all(fl);
-	return (2);
+	fl->c.r_x = c_r_x;
+	fl->c.i_y = c_i_y;
+	fl->mouse_coordinates = coordinates;
 }
 
 void	is_julia_or_mandel(int argc, char **argv, t_frctl *fl)
 {
-	if (ft_strncmp(argv[1], "Julia", 6) && ft_strncmp(argv[1], "Mandelbrot",
-			11))
+	if (ft_strncmp(argv[1], "Julia", 6)
+		&& ft_strncmp(argv[1], "Mandelbrot", 11))
 		exit(p_err("Err: Available fractals: Mandelbrot or Julia\n", fl));
 	else if (!ft_strncmp(argv[1], "Mandelbrot", 10))
 	{
 		fl->fractal = MANDELBROT;
-		fl->c.r_x = 0.0;
-		fl->c.i_y = 0.0;
-		fl->mouse_coordinates = 0;
+		init_values(fl, 0.0, 0.0, 0);
 	}
 	else if (!ft_strncmp(argv[1], "Julia", 5))
 	{
@@ -60,17 +35,14 @@ void	is_julia_or_mandel(int argc, char **argv, t_frctl *fl)
 			&& str_to_float(argv[3]) != 0)
 		{
 			fl->fractal = JULIA;
-			fl->c.r_x = str_to_float(argv[2]);
-			fl->c.i_y = str_to_float(argv[3]);
-			fl->mouse_coordinates = 1;
+			init_values(fl, str_to_float(argv[2]), str_to_float(argv[3]), 1);
 		}
 		else
 			exit(p_err("Err: Julia set takes two decilmal arguments\n", fl));
 	}
 	else
 		exit(p_err("Error: Available fractal: Mandelbrot\n"
-					"Please call the exe followed by your chosen fractal\n",
-					fl));
+				"Please call the exe followed by your chosen fractal\n", fl));
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/29 21:59:13 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:10:14 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,11 @@ int			init_events(t_frctl *fl);
 int			handle_mouse(int mouse_move, int x, int y, t_frctl *fl);
 int			handle_mouse_motion(int x, int y, t_frctl *fl);
 int			handle_keys(int keycode, t_frctl *fl);
-int			render_zoom(t_frctl *fl, int quadratic);
 int			close_window(int keycode, t_frctl *fl);
 int			close_all(t_frctl *fl);
 int			p_err(char *err, t_frctl *fl);
+int			color_calc(int iterations, t_frctl *fl);
+void		fractal_calc(t_c px, t_frctl *fl, int quadratic);
 void		render_fractal(t_frctl *fl, int quadratic);
 
 #endif

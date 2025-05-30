@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:32:13 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/29 22:13:13 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:06:56 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	init_scale_image(t_frctl *fl)
 static int	render_zoom_full(t_frctl *fl)
 {
 	if (fl->zoom_to_update)
-		render_zoom(fl, 0);
+	{
+		render_fractal(fl, 0);
+		fl->zoom_to_update = 0;
+	}
 	return (0);
 }
 

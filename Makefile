@@ -24,6 +24,9 @@ SRC = main.c \
 	  init.c \
 	  render_fractal.c \
 	  str_to_float.c \
+	  color_calc.c \
+	  fractal_calc.c \
+	  utils.c \
 	  events.c
 OBJ = $(SRC:.c=.o)
 DEBUG_OBJ = $(SRC:.c=_debug.o)

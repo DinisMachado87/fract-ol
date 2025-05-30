@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 20:35:04 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/29 22:14:37 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/05/30 18:10:12 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	render_count(t_frctl *fl)
 {
 	if (fl->zoom_to_update == 10)
-		render_zoom(fl, 1);
+	{
+		render_fractal(fl, 1);
+		fl->zoom_to_update = 0;
+	}
 	else
 		fl->zoom_to_update++;
 	return (0);
@@ -39,13 +42,6 @@ static void	zoom_and_recenter(int x, int y, t_frctl *fl, char zoom)
 	fl->y_width = scale_y_px_to_math(fl);
 	fl->x_min = fl->x_offset - ((double)x / RES_WIDTH) * fl->x_width;
 	fl->y_min = fl->y_offset - ((double)y / RES_HIGHT) * fl->y_width;
-}
-
-int	render_zoom(t_frctl *fl, int quadratic)
-{
-	render_fractal(fl, quadratic);
-	fl->zoom_to_update = 0;
-	return (0);
 }
 
 int	handle_mouse(int mouse_move, int x, int y, t_frctl *fl)
@@ -103,10 +99,4 @@ int	handle_keys(int keycode, t_frctl *fl)
 		fl->y_min += fl->y_width / 5;
 	render_fractal(fl, 0);
 	return (-1);
-}
-
-int	close_window(int keycode, t_frctl *fl)
-{
-	(void)keycode;
-	return (close_all(fl));
 }
