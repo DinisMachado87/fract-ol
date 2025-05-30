@@ -70,12 +70,16 @@ $(DEBUG_NAME): $(DEBUG_OBJ)
 clean:
 	$(RM) $(OBJ) $(DEBUG_OBJ)
 	make -C $(LIBFT_DIR) clean
-	make -C $(MLX_DIR) clean
+	@if [ -d $(MLX_DIR) ]; then \
+		make -C $(MLX_DIR) clean; \
+	fi
 
 fclean: clean
 	$(RM) $(NAME) $(DEBUG_NAME)
 	make -C $(LIBFT_DIR) fclean
-	make -C $(MLX_DIR) clean
+	@if [ -d $(MLX_DIR) ]; then \
+		make -C $(MLX_DIR) clean; \
+	fi
 
 re: fclean all
 
