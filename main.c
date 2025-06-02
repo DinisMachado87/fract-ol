@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:01:23 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/30 21:44:09 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:32:19 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	is_julia_or_mandel(int argc, char **argv, t_frctl *fl)
 			exit(p_err("Err: Julia set takes two decilmal arguments\n", fl));
 	}
 	else
-		exit(p_err("Error: Available fractal: Mandelbrot and Julia\n"
+		exit(p_err("Err: Available fractal: Mandelbrot and Julia\n"
 				"Please call the exe followed by your chosen fractal\n", fl));
 }
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	t_frctl	fl;
 
 	if (argc < 2)
-		exit(p_err("Error: Available fractal: Mandelbrot and Julia\n"
+		exit(p_err("Err: Available fractals: Mandelbrot and Julia\n"
 				"Please call the exe followed by your chosen fractal\n", &fl));
 	ft_memset(&fl, 0, sizeof(t_frctl));
 	is_julia_or_mandel(argc, argv, &fl);

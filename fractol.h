@@ -6,7 +6,7 @@
 /*   By: dimachad <dimachad@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 20:38:39 by dimachad          #+#    #+#             */
-/*   Updated: 2025/05/30 21:42:40 by dimachad         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:51:50 by dimachad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <errno.h>
 # include <stdio.h>
 
+# define MOTION_NOTIFY 6
+# define KEY_PRESS 2
+# define DESTROY_NOTIFY 17
+# define POINTER_MOTION_MASK 64 // 1L << 6
+# define KEY_PRESS_MASK 1 // 1L << 0
+# define STRUCTURE_NOTIFY_MASK 131072 // 1L << 17
 # define MANDELBROT 1
 # define JULIA 2
 # define GREEN 2
